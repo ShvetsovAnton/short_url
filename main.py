@@ -34,11 +34,14 @@ def is_bitly(headers, user_url):
 
 
 def main():
-    parse = argparse.ArgumentParser(description="Will make url short")
-    parse.add_argument("user_url", type=str, help="Enter you URL")
-    args = parse.parse_args()
-    user_url = args.user_url
-    load_dotenv(".env")
+    script_launch_options = argparse.ArgumentParser(
+        description="Will make url short"
+    )
+    script_launch_options.add_argument("user_url",
+                                       type=str, help="Enter you URL")
+    script_options = script_launch_options.parse_args()
+    user_url = script_options.user_url
+    load_dotenv()
     token = os.environ["TOKEN_BITLY"]
     headers = {"Authorization": f"Bearer {token}"}
     try:
@@ -50,6 +53,7 @@ def main():
             print(f"You short url - {short_url}")
     except requests.exceptions.HTTPError:
         print("You enter wrong url")
+
 
 if __name__ == "__main__":
     main()
