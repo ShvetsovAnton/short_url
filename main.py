@@ -34,13 +34,10 @@ def is_bitly(headers, user_url):
 
 
 def main():
-    script_launch_parameters = argparse.ArgumentParser(
-        description="Will make url short"
-    )
-    script_launch_parameters.add_argument("user_url",
-                                       type=str, help="Enter you URL")
-    script_parameters = script_launch_parameters.parse_args()
-    user_url = script_parameters.user_url
+    args_parser = argparse.ArgumentParser(description="Will make url short")
+    args_parser.add_argument("user_url", type=str, help="Enter you URL")
+    args = args_parser.parse_args()
+    user_url = args.user_url
     load_dotenv()
     token = os.environ["TOKEN_BITLY"]
     headers = {"Authorization": f"Bearer {token}"}
